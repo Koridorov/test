@@ -1,0 +1,2 @@
+mylist = ["a", "a", "b", "a", "b"]
+print(len(mylist)) # точно както при string-овете

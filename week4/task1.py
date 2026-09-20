@@ -4,7 +4,6 @@ mylist=[]
 for i in range (0,n):
     j=int(input("Please make an entry to the list: "))
     mylist.append(j)
-    j=0
 print(sum(mylist))
 print(f"The biggest number in the list is {max(mylist)}")
 print(f"The smallest number in the list is {min(mylist)}")

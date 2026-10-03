@@ -1,8 +1,9 @@
-full_name_list = [('Joe', 'Schmoe', 23),
-                  ('Earnst', 'Ehlmann', 65),
-                  ('Thomas', 'Fischer', 11),
-                  ('Martin', 'Walter', 36),
-                  ('Charles', 'Rogan', 83)]
+def generateListUntilN(n):
+    lst = [2, 3]
+    for i in range(2, n + 1):
+        ci = lst[i - 1] * lst[i - 2]
+        lst.append(ci)
+    return lst
 
-first_name, last_name, age = list(zip(*full_name_list))
-print(f"first name: {first_name}\nlast name: {last_name} \nage: {age}")
+
+print(generateListUntilN(7))

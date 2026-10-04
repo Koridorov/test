@@ -5,4 +5,4 @@ def phone_number_check(number: str) -> bool:
         number[1:].isdigit()
     )
 
-print(phone_number_check("+359876409357"))  # Output: True
+print(phone_number_check("+359876409357"))

@@ -6,4 +6,6 @@ def generateListUntilN(n):
     return lst
 
 
-print(generateListUntilN(7))
+#print(generateListUntilN(7))
+
+print("1984;George Orwell;12345;1984".split(";"))

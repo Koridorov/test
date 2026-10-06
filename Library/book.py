@@ -46,11 +46,15 @@ class Book():
         return f"\"{self.title}\" by {self.author} ({self.year}) - {"Available" if self.__is_available==True else "Unavailable"}"
 
     def __repr__(self):
-        return f"Book(title=={self.title}, author=={self.author}, isbn=={self.isbn}, year=={self.year})"
+        #return f"Book(title=={self.title}, author=={self.author}, isbn=={self.isbn}, year=={self.year})"
+        return f"\"{self.title}\" by {self.author} ({self.year})" #{"Available" if self.__is_available==True else "Unavailable"}"
 
     @staticmethod
     def is_valid_isbn(isbn:str):
-        return 10<=len(isbn.replace("-",""))<=13
+        if (len(isbn.replace("-",""))==10 or len(isbn.replace("-",""))==13) and isbn.replace("-","").isdigit():
+            return True
+        return False
+    
     #this is a staticmethod because this does not "touch" the class, instead only looks at it. from_string MAKES a new instance of class, so it is a class method
 
     @classmethod

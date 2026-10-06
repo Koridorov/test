@@ -38,22 +38,36 @@ class Library():
         return book_list_title
 
     def lend(self, isbn, member_id):
-        member=Member(self.members.get(member_id))
-        book=(self.books.get(isbn))
+        member=self.members.get(member_id)
+        book=self.books.get(isbn)
+
+        if member is None:
+            print("No member with this ID.")
+            return
+        if book is None:
+            print("No book with this ISBN.")
+            return
+        
         try:
             member.borrow_book(book)
-        except (BorrowLimitError, BookNotAvialableError):
-            print("The book is not available to borrow or you have reached the borrow limit. ")
-        except (AttributeError, KeyError):
-            print("Either the ISBN or the member ID is invalid. Please check both. ")
+        except BorrowLimitError:
+            print(f"{member.name} has reached the limit of {member.MAX_BOOKS} books.")
+        except BookNotAvialableError:
+            print(f'"{book.title}" is currently borrowed by someone else.')
+        else:
+            print(f'{member.name} borrowed "{book.title}".')
 
-
+    def return_books(self, isbn, member_id):
+            member=self.members.get(member_id)
+            book=self.books.get(isbn)
+            member.return_book(book)
+            
     def get_available_books(self):
         book_list_available=[]
         for _ in self.books.values():
             if _.is_available:
                 book_list_available.append(_)
-        return book_list_available
+        print(book_list_available)
 
     def report(self):
         print(f"""
@@ -61,7 +75,7 @@ This Library manages {len(self.books)} books.
 The available books are: {self.get_available_books()}.
 This Library manages {len(self.members)} members.
             """)
-        print("Borrowed Books:")
+        print("Borrowed Books:", end=" ")
         for member in self.members.values():
             if member.borrowed_books:
-                print(f" - {member.name}: {member.borrowed_books}")
+                print(f" - {member.name}: {member.borrowed_books}", end=";")

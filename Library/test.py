@@ -28,5 +28,12 @@ member1=Member("Stefan Stambolov")
 Library1.add_book(book1)
 Library1.register_member(member1)
 
+print(book1.is_available)
+member1.borrow_book(book1)
+print(book1.is_available)
+print(member1.borrowed_books)
+
+
+
 Library1.report()
 #print(Library1.find_by_title(84))

@@ -50,7 +50,7 @@ class Book():
 
     @staticmethod
     def is_valid_isbn(isbn:str):
-        return 10<=len(isbn.strip("-" and " "))<=13
+        return 10<=len(isbn.replace("-",""))<=13
     #this is a staticmethod because this does not "touch" the class, instead only looks at it. from_string MAKES a new instance of class, so it is a class method
 
     @classmethod

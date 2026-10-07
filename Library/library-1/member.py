@@ -16,7 +16,7 @@ class Member():
     def __init__(self, name:str):
         self.name=name
         Member.count+=1
-        self.member_id=Member.count
+        self.member_id=str(Member.count)
         self.borrowed_books=[]
 
     def borrow_book(self, book:Book):

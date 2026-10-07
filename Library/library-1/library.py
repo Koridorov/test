@@ -12,7 +12,7 @@ class Library():
 
     def add_book(self, book:Book):
         if book.isbn in self.books.keys():
-            raise ValueError("This book is already present in the library. Please enter another ISBN. ")
+            raise ValueError
         self.books[book.isbn]=book
 
     def remove_book(self, isbn):
@@ -67,7 +67,7 @@ class Library():
         for _ in self.books.values():
             if _.is_available:
                 book_list_available.append(_)
-        print(book_list_available)
+        return book_list_available
 
     def report(self):
         print(f"""
@@ -78,4 +78,4 @@ This Library manages {len(self.members)} members.
         print("Borrowed Books:", end=" ")
         for member in self.members.values():
             if member.borrowed_books:
-                print(f" - {member.name}: {member.borrowed_books}", end=";")
+                print(f"{member.name}: {member.borrowed_books}", end=";")

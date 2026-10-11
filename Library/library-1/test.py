@@ -25,15 +25,26 @@ Library1=Library("Library1")
 book1=Book(1984, "George Orwell", "9780451524935", 1984)
 member1=Member("Stefan Stambolov")
 
-Library1.add_book(book1)
-Library1.register_member(member1)
+#Library1.add_book(book1)
+#Library1.register_member(member1)
 
-print(book1.is_available)
+#print(book1.is_available)
+#member1.borrow_book(book1)
+#print(book1.is_available)
+#print(member1.borrowed_books)
+print(book1.to_dict())
+
+
+
+
+
+print(member1.to_dict())
 member1.borrow_book(book1)
-print(book1.is_available)
-print(member1.borrowed_books)
+member2=(Member.from_dict(member1.to_dict()))
+print(member2)
 
 
-
-Library1.report()
+book2=Book.from_dict(book1.to_dict())
+print(book2)
+#Library1.report()
 #print(Library1.find_by_title(84))

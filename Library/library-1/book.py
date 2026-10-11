@@ -66,3 +66,12 @@ class Book():
     @classmethod
     def get_total_books(cls):
         return cls.total_books
+
+    def to_dict(self):
+        return {"title":self.title, "author":self.author, "isbn":self.isbn, "year":self.year, "is_available":self.is_available}
+
+    @classmethod
+    def from_dict(cls, data):
+        book=cls(data["title"], data["author"], data["isbn"], data["year"])
+        book.__is_available=data["is_available"]
+        return book

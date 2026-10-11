@@ -40,6 +40,17 @@ class Member():
     def __str__(self):
         return f"{self.name}, ID Number {self.member_id}. Currently borrowing {len(self.borrowed_books)} books."
 
+    def to_dict(self):
+         return {"name":self.name, "member_id":self.member_id, "borrowed_books":self.borrowed_books, "Member_count":Member.count}
+
+    @classmethod
+    def from_dict(cls, data):
+         member=cls(data["name"])
+         member.member_id=(data["member_id"])
+         member.borrowed_books=(data["borrowed_books"])
+         Member.count=(data["Member_count"])
+         return member
+
 class StudentMember(Member):
 
     MAX_BOOKS=5
@@ -64,3 +75,6 @@ class PremiumMember(Member):
 
     def __str__(self):
         return f"Premium member {self.name}, ID Number {self.member_id}. Currently borrowing {len(self.borrowed_books)} books. Your membership fee is {self.membership_fee}."
+
+
+         

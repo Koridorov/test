@@ -1,8 +1,14 @@
 from member import (Member, BorrowLimitError, BookNotBorrowedError, BookNotAvialableError)
 from book import Book
 from library import Library
+import json
+library=Library("library")
+def load(library:Library):
+    try:
+        library.load_library()
+    except:
+        return
 
-Biblioteka=Library("Biblioteka")
 
 class Menu():
 
@@ -35,11 +41,11 @@ class Menu():
             match value:
                     case 1:
                         author=input("Enter the first and last name of the author: ")
-                        print(Biblioteka.find_by_author(author))
+                        print(library.find_by_author(author))
                         self.continue_button()
                     case 2:
                         title=input("Enter any part of the title you are looking for: ")
-                        print(Biblioteka.find_by_title(title))
+                        print(library.find_by_title(title))
                         self.continue_button()
                     case 0:
                         print("bybye nigga")
@@ -48,6 +54,7 @@ class Menu():
                         print("Maika ti da eba!!!!!!!!!")
 
     def run(self):
+        load(library)
         while True:
             print("\n\n\n\n\n\n\n\n\n\n\n\n\n ")
             self.main()
@@ -65,7 +72,7 @@ class Menu():
                         try:
                             book=Book(title, author, isbn, year)
                             try:
-                                Biblioteka.add_book(book)
+                                library.add_book(book)
                                 print(f"{book.title} has been added to the library database.")
                                 self.continue_button()
                             except ValueError:
@@ -78,7 +85,7 @@ class Menu():
                     case 2:
                         name=input("Enter your name: ")
                         member=Member(name)
-                        Biblioteka.register_member(member)
+                        library.register_member(member)
                         print(f"Member {name} has been registered. Your member ID is {member.member_id}.")
                         self.continue_button()
 
@@ -86,11 +93,11 @@ class Menu():
                         member_id=input("Enter your member ID: ")
                         isbn=input("Enter the ISBN of the book you'd like to lend: ")
 
-                        book=Biblioteka.books.get(isbn)
-                        member=Biblioteka.members.get(member_id)
+                        book=library.books.get(isbn)
+                        member=library.members.get(member_id)
 
                         try:
-                            Biblioteka.lend(isbn, member_id)
+                            library.lend(isbn, member_id)
                             print(f"The book {book.title} has been successfully lent to {member.name}.")
                             self.continue_button()
                         except ValueError:
@@ -108,10 +115,10 @@ class Menu():
                         member_id=input("Enter your member ID: ")
                         isbn=input("Enter the ISBN of the book you'd like to return: ")
 
-                        book=Biblioteka.books.get(isbn)
-                        member=Biblioteka.members.get(member_id)
+                        book=library.books.get(isbn)
+                        member=library.members.get(member_id)
                         try:
-                            Biblioteka.return_books(isbn, member_id)
+                            library.return_books(isbn, member_id)
                             print(f"The book {book.title} has been successfully returned to the library by {member.name}.")
                             self.continue_button()
                         except ValueError, AttributeError:
@@ -125,11 +132,12 @@ class Menu():
                         self.search_books()
                     case 6: 
                         print("----------report----------")
-                        Biblioteka.report()
+                        library.report()
                         self.continue_button()
 
                     case 0:
                         print("Byeee")
+                        library.save_library()
                         break
                     case _:
                         print("maika ti da eba")

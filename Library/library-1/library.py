@@ -1,5 +1,5 @@
 from book import Book
-
+import json
 from member import (Member, PremiumMember, StudentMember)
 
 from member import (BorrowLimitError,BookNotAvialableError, BookNotBorrowedError)
@@ -40,14 +40,6 @@ class Library():
     def lend(self, isbn, member_id):
         member=self.members.get(member_id)
         book=self.books.get(isbn)
-
-        if member is None:
-            print("No member with this ID.")
-            return
-        if book is None:
-            print("No book with this ISBN.")
-            return
-        
         try:
             member.borrow_book(book)
         except BorrowLimitError:
@@ -79,3 +71,17 @@ This Library manages {len(self.members)} members.
         for member in self.members.values():
             if member.borrowed_books:
                 print(f"{member.name}: {member.borrowed_books}", end=";")
+
+    def load_library(self):
+        f=open("C:\\Users\\User\\Desktop\\Coding\\Library\\library-1\\mydata.json", "r")
+        [books_raw, members_raw]=json.load(f)
+        self.books={key:Book.from_dict(book) for key, book in books_raw.items()}
+        self.members={key:Member.from_dict(member) for key, member in members_raw.items()}
+        f.close()
+
+    def save_library(self):
+        f=open("C:\\Users\\User\\Desktop\\Coding\\Library\\library-1\\mydata.json", "w")
+        plain_books={key: book.to_dict() for key, book in self.books.items()}
+        plain_members={key: member.to_dict() for key, member in self.members.items()}
+        json.dump(([plain_books, plain_members]), f)
+        f.close()

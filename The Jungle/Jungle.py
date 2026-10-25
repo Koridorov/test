@@ -52,3 +52,4 @@ for animal in jungle.copy():
 
 print(len(jungle))
 print(fruits)
+()

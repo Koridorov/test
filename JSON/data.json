@@ -1,0 +1,50 @@
+[
+  {
+    "title": "1984",
+    "author": "George Orwell",
+    "genre": ["Dystopian", "Political Fiction"],
+    "rating": 4.7,
+    "pages": 328,
+    "price": 18.99
+  },
+  {
+    "title": "Harry Potter and the Philosopher's Stone",
+    "author": "J.K. Rowling",
+    "genre": ["Fantasy", "Adventure"],
+    "rating": 4.8,
+    "pages": 223,
+    "price": 22.50
+  },
+  {
+    "title": "A Brief History of Time",
+    "author": "Stephen Hawking",
+    "genre": ["Popular Science", "Physics"],
+    "rating": 4.6,
+    "pages": 256,
+    "price": 25.00
+  },
+  {
+    "title": "Crime and Punishment",
+    "author": "Fyodor Dostoevsky",
+    "genre": ["Classic", "Psychological Fiction"],
+    "rating": 4.5,
+    "pages": 671,
+    "price": 19.99
+  },
+  {
+    "title": "The Art of War",
+    "author": "Sun Tzu",
+    "genre": ["Philosophy", "Military Strategy"],
+    "rating": 4.3,
+    "pages": 273,
+    "price": 14.50
+  },
+  {
+    "title": "Steve Jobs",
+    "author": "Walter Isaacson",
+    "genre": ["Biography", "Business"],
+    "rating": 4.7,
+    "pages": 656,
+    "price": 27.99
+  }
+]

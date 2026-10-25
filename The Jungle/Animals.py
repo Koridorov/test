@@ -43,14 +43,17 @@ class Jaguar(Animal):
         while True:
             i+=1
             try:
-                if type(lst[i+lst.index(self)]) is (Human or Lemur):
+                if type(lst[i+lst.index(self)]) is Human or type(lst[i+lst.index(self)]) is Lemur:
                     print(f"{self.name} the {type(self)} hunted down {lst[i+lst.index(self)].name}")
                     lst.pop(i+lst.index(self))
-                elif type(lst[lst.index(self)-i]) is (Human or Lemur):
+                    break
+                elif type(lst[lst.index(self)-i]) is Human or type(lst[lst.index(self)-i]) is Lemur:
                     print(f"{self.name} the {type(self)} hunted down {lst[lst.index(self)-i].name}")
                     lst.pop(lst.index(self)-i)
+                    break
             except IndexError:
                 if i==len(lst):
+                    print (f"{self.name} the {type(self)} has no one to hunt down and went home hungry. ")
                     break
                 continue
                      
@@ -78,6 +81,9 @@ class Lemur(Animal):
 
 
 class Human(Animal):
+
+    building_count=0
+
     def __init__(self, name, age, sound):
         super().__init__(name, age, sound)
         if age>10:
@@ -87,17 +93,16 @@ class Human(Animal):
 
     def daily_task(self, lst:list):
         human_index=lst.index(self)
-        building_count=0
         all_buildings=dict()
-        if (human_index==0 and type(lst[human_index+1])==Human):
-            building_count+=1
-            all_buildings[(f"Building{building_count}")]=(self.name, lst[human_index+1].name)
-            print(building_count, all_buildings)
-        elif (human_index==len(lst)-1 and type(lst[human_index-1]==Human)):
-            building_count+=1
-            all_buildings[(f"Building{building_count}")]=(self.name, lst[human_index-1].name)
-            print(building_count, all_buildings)
+        if human_index==0 and type(lst[human_index+1])==Human and type(lst[human_index+2])!=Human:
+            Human.building_count+=1
+            all_buildings[(f"Building{Human.building_count}")]=(self.name, lst[human_index+1].name)
+            print(Human.building_count, all_buildings)
+        elif (human_index==len(lst)-1 and type(lst[human_index-1]==Human) and type(lst[human_index+2])!=Human):
+            Human.building_count+=1
+            all_buildings[(f"Building{Human.building_count}")]=(self.name, lst[human_index-1].name)
+            print(Human.building_count, all_buildings)
         elif type(lst[human_index+1])==Human and type(lst[human_index-1])==Human:
-            building_count+=1
-            all_buildings[(f"Building{building_count}")]=(lst[human_index-1].name, self.name, lst[human_index-1].name)
-            print(building_count, all_buildings)
+            Human.building_count+=1
+            all_buildings[(f"Building{Human.building_count}")]=(lst[human_index-1].name, self.name, lst[human_index+1].name)
+            print(Human.building_count, all_buildings)

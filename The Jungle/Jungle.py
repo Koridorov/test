@@ -11,7 +11,7 @@ for i in range(x):
     l=hash(randomizer[i])%6
     randomizer.append(str(hash(randomizer[i])))
     
-    if hash(randomizer[i])%101<41:
+    if hash(randomizer[i])%101<21:
         try:
             jungle.append(Jaguar(names[k], j, sounds[l]))
         except WrongType:
@@ -20,7 +20,7 @@ for i in range(x):
             continue
         except MissingData:
             continue
-    elif hash(randomizer[i])%101<81:
+    elif hash(randomizer[i])%101<41:
         try:
             jungle.append(Lemur(names[k], j, sounds[l]))
         except WrongType:
@@ -44,10 +44,10 @@ for i in range(len(jungle)):
 
 print(len(jungle))
 
-for animal in jungle:
-    if type(animal)==Lemur:
+for animal in jungle.copy():
+    if type(animal)==Lemur and animal in jungle:
         fruits=animal.daily_task(fruits)
-    else:
+    elif animal in jungle:
         animal.daily_task(jungle)
 
 print(len(jungle))

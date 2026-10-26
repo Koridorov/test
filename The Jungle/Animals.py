@@ -78,6 +78,8 @@ class Jaguar(Animal):
                         print(f"{self.name} the {type(self)} hunted down {lst[lst.index(self)-i].name}")
                         lst.pop(lst.index(self)-i)
                         break
+                    else:
+                        i+=1
                 except IndexError:
                     if i==len(lst):
                         print (f"{self.name} the {type(self)} has no one to hunt down and went home hungry. ")

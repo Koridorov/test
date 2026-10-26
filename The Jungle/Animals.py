@@ -42,6 +42,32 @@ class Jaguar(Animal):
         i=0
         while True:
             i+=1
+            if lst.index(self)==0:
+                while True:
+                    try:
+                        if type(lst[i+lst.index(self)]) is Human or type(lst[i+lst.index(self)]) is Lemur:
+                            print(f"{self.name} the {type(self)} hunted down {lst[i+lst.index(self)].name}")
+                            lst.pop(i+lst.index(self))
+                            break
+                        else:
+                            i+=1
+                    except IndexError:
+                        if i==len(lst):
+                            print (f"{self.name} the {type(self)} has no one to hunt down and went home hungry. ")
+                            break
+            elif lst.index(self)==len(lst)-1:
+                while True:
+                    try:                        
+                        if type(lst[lst.index(self)-i]) is Human or type(lst[lst.index(self)-i]) is Lemur:
+                            print(f"{self.name} the {type(self)} hunted down {lst[lst.index(self)-i].name}")
+                            lst.pop(lst.index(self)-i)
+                            break
+                        else:
+                            i+=1
+                    except IndexError:
+                        if i==len(lst):
+                            print (f"{self.name} the {type(self)} has no one to hunt down and went home hungry. ")
+                            break
             try:
                 if type(lst[i+lst.index(self)]) is Human or type(lst[i+lst.index(self)]) is Lemur:
                     print(f"{self.name} the {type(self)} hunted down {lst[i+lst.index(self)].name}")
@@ -54,9 +80,7 @@ class Jaguar(Animal):
             except IndexError:
                 if i==len(lst):
                     print (f"{self.name} the {type(self)} has no one to hunt down and went home hungry. ")
-                    break
-                continue
-                     
+                    break                     
 
 class Lemur(Animal):
     def __init__(self, name, age, sound):
@@ -83,6 +107,8 @@ class Lemur(Animal):
 class Human(Animal):
 
     building_count=0
+    all_buildings=dict()
+
 
     def __init__(self, name, age, sound):
         super().__init__(name, age, sound)
@@ -93,16 +119,24 @@ class Human(Animal):
 
     def daily_task(self, lst:list):
         human_index=lst.index(self)
-        all_buildings=dict()
         if human_index==0 and type(lst[human_index+1])==Human and type(lst[human_index+2])!=Human:
-            Human.building_count+=1
-            all_buildings[(f"Building{Human.building_count}")]=(self.name, lst[human_index+1].name)
-            print(Human.building_count, all_buildings)
+            try:
+                Human.building_count+=1
+                Human.all_buildings[(f"Building{Human.building_count}")]=(self.name, lst[human_index+1].name)
+                print(Human.building_count, Human.all_buildings)
+            except IndexError:
+                pass
         elif (human_index==len(lst)-1 and type(lst[human_index-1]==Human) and type(lst[human_index+2])!=Human):
-            Human.building_count+=1
-            all_buildings[(f"Building{Human.building_count}")]=(self.name, lst[human_index-1].name)
-            print(Human.building_count, all_buildings)
+            try:
+                Human.building_count+=1
+                Human.all_buildings[(f"Building{Human.building_count}")]=(self.name, lst[human_index-1].name)
+                print(Human.building_count, Human.all_buildings)
+            except IndexError:
+                pass
         elif type(lst[human_index+1])==Human and type(lst[human_index-1])==Human:
-            Human.building_count+=1
-            all_buildings[(f"Building{Human.building_count}")]=(lst[human_index-1].name, self.name, lst[human_index+1].name)
-            print(Human.building_count, all_buildings)
+            try:
+                Human.building_count+=1
+                Human.all_buildings[(f"Building{Human.building_count}")]=(lst[human_index-1].name, self.name, lst[human_index+1].name)
+                print(Human.building_count, Human.all_buildings)
+            except IndexError:
+                pass

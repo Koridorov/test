@@ -11,7 +11,7 @@ for i in range(x):
     l=hash(randomizer[i])%6
     randomizer.append(str(hash(randomizer[i])))
     
-    if hash(randomizer[i])%101<11:
+    if hash(randomizer[i])%101<21:
         try:
             jungle.append(Jaguar(names[k], j, sounds[l]))
         except WrongType:

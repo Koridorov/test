@@ -68,19 +68,20 @@ class Jaguar(Animal):
                         if i==len(lst):
                             print (f"{self.name} the {type(self)} has no one to hunt down and went home hungry. ")
                             break
-            try:
-                if type(lst[i+lst.index(self)]) is Human or type(lst[i+lst.index(self)]) is Lemur:
-                    print(f"{self.name} the {type(self)} hunted down {lst[i+lst.index(self)].name}")
-                    lst.pop(i+lst.index(self))
-                    break
-                elif type(lst[lst.index(self)-i]) is Human or type(lst[lst.index(self)-i]) is Lemur:
-                    print(f"{self.name} the {type(self)} hunted down {lst[lst.index(self)-i].name}")
-                    lst.pop(lst.index(self)-i)
-                    break
-            except IndexError:
-                if i==len(lst):
-                    print (f"{self.name} the {type(self)} has no one to hunt down and went home hungry. ")
-                    break                     
+            else:
+                try:
+                    if type(lst[i+lst.index(self)]) is Human or type(lst[i+lst.index(self)]) is Lemur:
+                        print(f"{self.name} the {type(self)} hunted down {lst[i+lst.index(self)].name}")
+                        lst.pop(i+lst.index(self))
+                        break
+                    elif type(lst[lst.index(self)-i]) is Human or type(lst[lst.index(self)-i]) is Lemur:
+                        print(f"{self.name} the {type(self)} hunted down {lst[lst.index(self)-i].name}")
+                        lst.pop(lst.index(self)-i)
+                        break
+                except IndexError:
+                    if i==len(lst):
+                        print (f"{self.name} the {type(self)} has no one to hunt down and went home hungry. ")
+                        break                     
 
 class Lemur(Animal):
     def __init__(self, name, age, sound):
@@ -119,24 +120,27 @@ class Human(Animal):
 
     def daily_task(self, lst:list):
         human_index=lst.index(self)
-        if human_index==0 and type(lst[human_index+1])==Human and type(lst[human_index+2])!=Human:
-            try:
-                Human.building_count+=1
-                Human.all_buildings[(f"Building{Human.building_count}")]=(self.name, lst[human_index+1].name)
-                print(Human.building_count, Human.all_buildings)
-            except IndexError:
-                pass
-        elif (human_index==len(lst)-1 and type(lst[human_index-1]==Human) and type(lst[human_index+2])!=Human):
-            try:
-                Human.building_count+=1
-                Human.all_buildings[(f"Building{Human.building_count}")]=(self.name, lst[human_index-1].name)
-                print(Human.building_count, Human.all_buildings)
-            except IndexError:
-                pass
-        elif type(lst[human_index+1])==Human and type(lst[human_index-1])==Human:
-            try:
-                Human.building_count+=1
-                Human.all_buildings[(f"Building{Human.building_count}")]=(lst[human_index-1].name, self.name, lst[human_index+1].name)
-                print(Human.building_count, Human.all_buildings)
-            except IndexError:
+        try:
+            if human_index==0 and type(lst[human_index+1])==Human:
+                try:
+                    Human.building_count+=1
+                    Human.all_buildings[(f"Building{Human.building_count}")]=(self.name, lst[human_index+1].name)
+                    print(Human.building_count, Human.all_buildings)
+                except IndexError:
+                    pass
+            elif (human_index==len(lst)-1 and type(lst[human_index-1]==Human)):
+                try:
+                    Human.building_count+=1
+                    Human.all_buildings[(f"Building{Human.building_count}")]=(self.name, lst[human_index-1].name)
+                    print(Human.building_count, Human.all_buildings)
+                except IndexError:
+                    pass
+            elif type(lst[human_index+1])==Human and type(lst[human_index-1])==Human:
+                try:
+                    Human.building_count+=1
+                    Human.all_buildings[(f"Building{Human.building_count}")]=(lst[human_index-1].name, self.name, lst[human_index+1].name)
+                    print(Human.building_count, Human.all_buildings)
+                except IndexError:
+                    pass
+        except IndexError:
                 pass
